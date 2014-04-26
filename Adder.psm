@@ -1,0 +1,256 @@
+	Start	   00	   5	IN	0		N	1	N
+		   01	   0				Y	0	N
+		   02	   3	ROR			N	0	Y
+		   03	   D	STA	Num0		N	2	Y
+		   04	   0				Y	0	N
+		   05	   B				Y	0	N
+		   06	   5	IN	1		N	1	Y
+		   07	   1				Y	0	N
+		   08	   3	ROR			N	0	N
+		   09	   D	STA	Num1		N	2	Y
+		   0A	   1				Y	0	N
+		   0B	   B				Y	0	N
+		   0C	   8	AND	Num0	Test BIt 0	N	2	Y
+		   0D	   0				Y	0	N
+		   0E	   B				Y	0	N
+		   0F	   D	STA	B0Gen	MSB = 1 if Generates	N	2	Y
+		   10	   4				Y	0	N
+		   11	   B				Y	0	N
+		   12	   F	LDAD	Num0	Test Bit 1	N	2	Y
+		   13	   0				Y	0	N
+		   14	   B				Y	0	N
+		   15	   3	ROR			N	0	Y
+		   16	   D	STA	Num0		N	2	Y
+		   17	   0				Y	0	N
+		   18	   B				Y	0	N
+		   19	   F	LDAD	Num1		N	2	Y
+		   1A	   1				Y	0	N
+		   1B	   B				Y	0	N
+		   1C	   3	ROR			N	0	Y
+		   1D	   D	STA	Num1		N	2	Y
+		   1E	   1				Y	0	N
+		   1F	   B				Y	0	N
+		   20	   8	AND	Num0		N	2	Y
+		   21	   0				Y	0	N
+		   22	   B				Y	0	N
+		   23	   D	STA	B1Gen	Generates	N	2	Y
+		   24	   5				Y	0	N
+		   25	   B				Y	0	N
+		   26	   F	LDAD	Num0		N	2	N
+		   27	   0				Y	0	N
+		   28	   B				Y	0	N
+		   29	   C	OR	Num1		N	2	Y
+		   2A	   1				Y	0	N
+		   2B	   B				Y	0	N
+		   2C	   D	STA	B1Prop	Propagates	N	2	Y
+		   2D	   8				Y	0	N
+		   2E	   B				Y	0	N
+		   2F	   F	LDAD	Num0	Test Bit 2	N	2	Y
+		   30	   0				Y	0	N
+		   31	   B				Y	0	N
+		   32	   3	ROR			N	0	Y
+		   33	   D	STA	Num0		N	2	Y
+		   34	   0				Y	0	N
+		   35	   B				Y	0	N
+		   36	   F	LDAD	Num1		N	2	Y
+		   37	   1				Y	0	N
+		   38	   B				Y	0	N
+		   39	   3	ROR			N	0	Y
+		   3A	   D	STA	Num1		N	2	Y
+		   3B	   1				Y	0	N
+		   3C	   B				Y	0	N
+		   3D	   8	AND	Num0		N	2	Y
+		   3E	   0				Y	0	N
+		   3F	   B				Y	0	N
+		   40	   D	STA	B2Gen	Generates	N	2	Y
+		   41	   6				Y	0	N
+		   42	   B				Y	0	N
+		   43	   F	LDAD	Num0		N	2	N
+		   44	   0				Y	0	N
+		   45	   B				Y	0	N
+		   46	   C	OR	Num1		N	2	Y
+		   47	   1				Y	0	N
+		   48	   B				Y	0	N
+		   49	   D	STA	B2Prop	Propagates	N	2	Y
+		   4A	   9				Y	0	N
+		   4B	   B				Y	0	N
+		   4C	   F	LDAD	Num0	Test Bit 3	N	2	Y
+		   4D	   0				Y	0	N
+		   4E	   B				Y	0	N
+		   4F	   3	ROR			N	0	Y
+		   50	   D	STA	Num0		N	2	Y
+		   51	   0				Y	0	N
+		   52	   B				Y	0	N
+		   53	   F	LDAD	Num1		N	2	Y
+		   54	   1				Y	0	N
+		   55	   B				Y	0	N
+		   56	   3	ROR			N	0	Y
+		   57	   D	STA	Num1		N	2	Y
+		   58	   1				Y	0	N
+		   59	   B				Y	0	N
+		   5A	   8	AND	Num0		N	2	Y
+		   5B	   0				Y	0	N
+		   5C	   B				Y	0	N
+		   5D	   D	STA	B3Gen	Generates	N	2	Y
+		   5E	   7				Y	0	N
+		   5F	   B				Y	0	N
+		   60	   F	LDAD	Num0		N	2	N
+		   61	   0				Y	0	N
+		   62	   B				Y	0	N
+		   63	   C	OR	Num1		N	2	Y
+		   64	   1				Y	0	N
+		   65	   B				Y	0	N
+		   66	   D	STA	B3Prop	Propagates	N	2	Y
+		   67	   A				Y	0	N
+		   68	   B				Y	0	N
+		   69	   F	LDAD	Num0	Add the numbers to obtain 4 LSB's	N	2	Y
+		   6A	   0				Y	0	N
+		   6B	   B				Y	0	N
+		   6C	   E	ADDD	Num1		N	2	Y
+		   6D	   1				Y	0	N
+		   6E	   B				Y	0	N
+		   6F	   4	OUT	1		N	1	Y
+		   70	   1				Y	0	N
+		   71	   F	LDAD	B3Gen	Test propagates and Generates	N	2	Y
+		   72	   7				Y	0	N
+		   73	   B				Y	0	N
+		   74	   B	JN	Carry		N	2	Y
+		   75	   0				Y	0	N
+		   76	   A				Y	0	N
+		   77	   F	LDAD	B3Prop		N	2	Y
+		   78	   A				Y	0	N
+		   79	   B				Y	0	N
+		   7A	   B	JN	B2Carry		N	2	Y
+		   7B	   0				Y	0	N
+		   7C	   8				Y	0	N
+		   7D	   9	JMP	NoCarry		N	2	Y
+		   7E	   B				Y	0	N
+		   7F	   9				Y	0	N
+	B2Carry	   80	   F	LDAD	B2Gen		N	2	Y
+		   81	   6				Y	0	N
+		   82	   B				Y	0	N
+		   83	   B	JN	Carry		N	2	Y
+		   84	   0				Y	0	N
+		   85	   A				Y	0	N
+		   86	   F	LDAD	B2Prop		N	2	Y
+		   87	   9				Y	0	N
+		   88	   B				Y	0	N
+		   89	   B	JN	B1Carry		N	2	Y
+		   8A	   F				Y	0	N
+		   8B	   8				Y	0	N
+		   8C	   9	JMP	NoCarry		N	2	Y
+		   8D	   B				Y	0	N
+		   8E	   9				Y	0	N
+	B1Carry	   8F	   F	LDAD	B1Gen		N	2	Y
+		   90	   5				Y	0	N
+		   91	   B				Y	0	N
+		   92	   B	JN	Carry		N	2	Y
+		   93	   0				Y	0	N
+		   94	   A				Y	0	N
+		   95	   F	LDAD	B1Prop		N	2	Y
+		   96	   8				Y	0	N
+		   97	   B				Y	0	N
+		   98	   8	AND	B0Gen		N	2	Y
+		   99	   4				Y	0	N
+		   9A	   B				Y	0	N
+	NoCarry	   9B	   7	LDAI	0		N	1	Y
+		   9C	   0				Y	0	N
+		   9D	   4	OUT	0		N	1	N
+		   9E	   0				Y	0	N
+		   9F	   9	JMP	Start		N	2	N
+		   A0	   0				Y	0	N
+		   A1	   0				Y	0	N
+	Carry	   A2	   7	LDAI	1		N	1	Y
+		   A3	   1				Y	0	N
+		   A4	   4	OUT	0		N	1	Y
+		   A5	   0				Y	0	N
+		   A6	   9	JMP	Start		N	2	Y
+		   A7	   0				Y	0	N
+		   A8	   0				Y	0	N
+		   A9	   0	NOP			N	0	N
+		   AA	   0	NOP			N	0	N
+		   AB	   0	NOP			N	0	N
+		   AC	   0	NOP			N	0	N
+		   AD	   0	NOP			N	0	N
+		   AE	   0	NOP			N	0	N
+		   AF	   0	NOP			N	0	N
+	Num0	   B0	   0	
+	Num1	   B1	   0	
+	Out0	   B2	   9	
+	Out1	   B3	   1	
+	B0Gen	   B4	   0	
+	B1Gen	   B5	   0	
+	B2Gen	   B6	   0	
+	B3Gen	   B7	   0	
+	B1Prop	   B8	   0	
+	B2Prop	   B9	   0	
+	B3Prop	   BA	   0	
+	Carrying	   BB	   0	
+		   BC	   0	
+		   BD	   0	
+		   BE	   0	
+		   BF	   0	
+		   C0	   0	
+		   C1	   0	
+		   C2	   0	
+		   C3	   0	
+		   C4	   0	
+		   C5	   0	
+		   C6	   0	
+		   C7	   0	
+		   C8	   0	
+		   C9	   0	
+		   CA	   0	
+		   CB	   0	
+		   CC	   0	
+		   CD	   0	
+		   CE	   0	
+		   CF	   0	
+		   D0	   0	
+		   D1	   0	
+		   D2	   0	
+		   D3	   0	
+		   D4	   0	
+		   D5	   0	
+		   D6	   0	
+		   D7	   0	
+		   D8	   0	
+		   D9	   0	
+		   DA	   0	
+		   DB	   0	
+		   DC	   0	
+		   DD	   0	
+		   DE	   0	
+		   DF	   0	
+		   E0	   0	
+		   E1	   0	
+		   E2	   0	
+		   E3	   0	
+		   E4	   0	
+		   E5	   0	
+		   E6	   0	
+		   E7	   0	
+		   E8	   0	
+		   E9	   0	
+		   EA	   0	
+		   EB	   0	
+		   EC	   0	
+		   ED	   0	
+		   EE	   0	
+		   EF	   0	
+		   F0	   0	
+		   F1	   0	
+		   F2	   0	
+		   F3	   0	
+		   F4	   0	
+		   F5	   0	
+		   F6	   0	
+		   F7	   0	
+		   F8	   0	
+		   F9	   0	
+		   FA	   0	
+		   FB	   0	
+		   FC	   0	
+		   FD	   0	
+		   FE	   0	
+		   FF	   0	

@@ -1,0 +1,256 @@
+	Start	   00	   7	LDAI	0	Initialize Variables	N	1	Y
+		   01	   0				Y	0	N
+		   02	   D	STA	Ones		N	2	Y
+		   03	   0				Y	0	N
+		   04	   B				Y	0	N
+		   05	   D	STA	Tens		N	2	Y
+		   06	   1				Y	0	N
+		   07	   B				Y	0	N
+	LoopStart	   08	   F	LDAD	Ones	Write ones adn tens values to the Output ports	N	2	Y
+		   09	   0				Y	0	N
+		   0A	   B				Y	0	N
+		   0B	   4	OUT	1		N	1	Y
+		   0C	   1				Y	0	N
+		   0D	   F	LDAD	Tens		N	2	Y
+		   0E	   1				Y	0	N
+		   0F	   B				Y	0	N
+		   10	   4	OUT	2		N	1	Y
+		   11	   2				Y	0	N
+		   12	   5	IN	0	Read Incremening or Decrementing input	N	1	Y
+		   13	   0				Y	0	N
+	StartVarSet	   14	   B	JN	CountDown	If the input value is negative jump to decrement path	N	2	Y
+		   15	   9				Y	0	N
+		   16	   2				Y	0	N
+	CountUp	   17	   7	LDAI	A	A is the adjusted increment, incrementing the origional value by 1 after it has been tested witht the break value 7 (-9)	N	1	Y
+		   18	   A				Y	0	N
+		   19	   D	STA	INC		N	2	Y
+		   1A	   2				Y	0	N
+		   1B	   B				Y	0	N
+		   1C	   7	LDAI	0	0 is the switch value in a sequenc, occuring after the 9	N	1	Y
+		   1D	   0				Y	0	N
+		   1E	   D	STA	SWT		N	2	Y
+		   1F	   3				Y	0	N
+		   20	   B				Y	0	N
+		   21	   7	LDAI	7	7 (-9) is added to the accumulator value to determine if the digit is a break value (9), indicating the digit will next take on the switch value	N	1	Y
+		   22	   7				Y	0	N
+		   23	   D	STA	BRK		N	2	Y
+		   24	   4				Y	0	N
+		   25	   B				Y	0	N
+		   26	   9	JMP	EndVarSet	Jump to the end of the Variable Setting Code	N	2	Y
+		   27	   8				Y	0	N
+		   28	   3				Y	0	N
+	CountDown	   29	   7	LDAI	F	Set Decrementing variables	N	1	Y
+		   2A	   F			F decrwements by -1	Y	0	N
+		   2B	   D	STA	INC		N	2	Y
+		   2C	   2				Y	0	N
+		   2D	   B				Y	0	N
+		   2E	   7	LDAI	9	9 is the switch vlaue as the next value down in a swqence from 0	N	1	Y
+		   2F	   9				Y	0	N
+		   30	   D	STA	SWT		N	2	Y
+		   31	   3				Y	0	N
+		   32	   B				Y	0	N
+		   33	   7	LDAI	0	0 is added to the digit to test if it is zero, exciting huh?	N	1	Y
+		   34	   0				Y	0	N
+		   35	   D	STA	BRK		N	2	Y
+		   36	   4				Y	0	N
+		   37	   B				Y	0	N
+	EndVarSet	   38	   E	ADDD	Ones	The accumulator is set to the break test values, a zero result indicates that the ones has reached the end of a sequence	N	2	Y
+		   39	   0				Y	0	N
+		   3A	   B				Y	0	N
+		   3B	   A	JZ	OnesBreak		N	2	Y
+		   3C	   7				Y	0	N
+		   3D	   4				Y	0	N
+	NoOnesBreak	   3E	   E	ADDD	INC	Add the adjusted incrementing value to the accumulator, it accounts for the addition durring the previous test	N	2	Y
+		   3F	   2			TL;DR add one	Y	0	N
+		   40	   B				Y	0	N
+		   41	   D	STA	Ones	Store the value to the ones memory spot	N	2	Y
+		   42	   0				Y	0	N
+		   43	   B				Y	0	N
+		   44	   9	JMP	LoopStart	Jump to the start of the program	N	2	Y
+		   45	   8				Y	0	N
+		   46	   0				Y	0	N
+	OnesBreak	   47	   F	LDAD	Tens	Load the tens digit to be tested	N	2	Y
+		   48	   1				Y	0	N
+		   49	   B				Y	0	N
+		   4A	   E	ADDD	BRK	Add the Break test value	N	2	Y
+		   4B	   4				Y	0	N
+		   4C	   B				Y	0	N
+		   4D	   A	JZ	TensBreak	If a zero result the tens digit is at the end of it's sequence	N	2	Y
+		   4E	   C				Y	0	N
+		   4F	   5				Y	0	N
+	NoTensBreak	   50	   E	ADDD	INC	No break so increment/decrement the value accordinlgly (with offset)	N	2	Y
+		   51	   2				Y	0	N
+		   52	   B				Y	0	N
+		   53	   D	STA	Tens		N	2	Y
+		   54	   1				Y	0	N
+		   55	   B				Y	0	N
+		   56	   F	LDAD	SWT	Load the switch value to be used in the one's digit after the jump	N	2	Y
+		   57	   3				Y	0	N
+		   58	   B				Y	0	N
+		   59	   9	JMP	EndTensBreak		N	2	Y
+		   5A	   2				Y	0	N
+		   5B	   6				Y	0	N
+	TensBreak	   5C	   F	LDAD	SWT		N	2	Y
+		   5D	   3				Y	0	N
+		   5E	   B				Y	0	N
+		   5F	   D	STA	Tens	Set the tens value to the Switch value	N	2	Y
+		   60	   1				Y	0	N
+		   61	   B				Y	0	N
+	EndTensBreak	   62	   D	STA	Ones	Set the Tens value to the Switch Valuje	N	2	Y
+		   63	   0				Y	0	N
+		   64	   B				Y	0	N
+		   65	   9	JMP	LoopStart	LoopStart	N	2	Y
+		   66	   8				Y	0	N
+		   67	   0				Y	0	N
+		   68	   0	NOP			N	0	Y
+		   69	   0	NOP			N	0	Y
+		   6A	   0	NOP			N	0	Y
+		   6B	   0	NOP			N	0	Y
+		   6C	   0	NOP			N	0	Y
+		   6D	   0	NOP			N	0	Y
+		   6E	   0	NOP			N	0	Y
+		   6F	   0	NOP			N	0	Y
+		   70	   0	NOP			N	0	Y
+		   71	   0	NOP			N	0	Y
+		   72	   0	NOP			N	0	Y
+		   73	   0	NOP			N	0	Y
+		   74	   0	NOP			N	0	Y
+		   75	   0	NOP			N	0	Y
+		   76	   0	NOP			N	0	Y
+		   77	   0	NOP			N	0	Y
+		   78	   0	NOP			N	0	Y
+		   79	   0	NOP			N	0	Y
+		   7A	   0	NOP			N	0	Y
+		   7B	   0	NOP			N	0	Y
+		   7C	   0	NOP			N	0	Y
+		   7D	   0	NOP			N	0	Y
+		   7E	   0	NOP			N	0	Y
+		   7F	   0	NOP			N	0	Y
+		   80	   0	NOP			N	0	Y
+		   81	   0	NOP			N	0	Y
+		   82	   0	NOP			N	0	Y
+		   83	   0	NOP			N	0	Y
+		   84	   0	NOP			N	0	Y
+		   85	   0	NOP			N	0	Y
+		   86	   0	NOP			N	0	Y
+		   87	   0	NOP			N	0	Y
+		   88	   0	NOP			N	0	Y
+		   89	   0	NOP			N	0	Y
+		   8A	   0	NOP			N	0	Y
+		   8B	   0	NOP			N	0	Y
+		   8C	   0	NOP			N	0	Y
+		   8D	   0	NOP			N	0	Y
+		   8E	   0	NOP			N	0	Y
+		   8F	   0	NOP			N	0	Y
+		   90	   0	NOP			N	0	Y
+		   91	   0	NOP			N	0	Y
+		   92	   0	NOP			N	0	Y
+		   93	   0	NOP			N	0	Y
+		   94	   0	NOP			N	0	Y
+		   95	   0	NOP			N	0	Y
+		   96	   0	NOP			N	0	Y
+		   97	   0	NOP			N	0	Y
+		   98	   0	NOP			N	0	Y
+		   99	   0	NOP			N	0	Y
+		   9A	   0	NOP			N	0	Y
+		   9B	   0	NOP			N	0	Y
+		   9C	   0	NOP			N	0	Y
+		   9D	   0	NOP			N	0	Y
+		   9E	   0	NOP			N	0	Y
+		   9F	   0	NOP			N	0	Y
+		   A0	   0	NOP			N	0	Y
+		   A1	   0	NOP			N	0	Y
+		   A2	   0	NOP			N	0	Y
+		   A3	   0	NOP			N	0	Y
+		   A4	   0	NOP			N	0	Y
+		   A5	   0	NOP			N	0	Y
+		   A6	   0	NOP			N	0	Y
+		   A7	   0	NOP			N	0	Y
+		   A8	   0	NOP			N	0	Y
+		   A9	   0	NOP			N	0	Y
+		   AA	   0	NOP			N	0	Y
+		   AB	   0	NOP			N	0	Y
+		   AC	   0	NOP			N	0	Y
+		   AD	   0	NOP			N	0	Y
+		   AE	   0	NOP			N	0	Y
+		   AF	   0	NOP			N	0	Y
+	Ones	   B0	   3	Stores the One's place value
+	Tens	   B1	   6	Stores the Ten's place value
+	INC	   B2	   F	Stores the adjusted incremnt value
+	SWT	   B3	   9	Contains the switch value, the digit that occures after the break in sequence, either a 9 or 0 depending on count direction
+	BRK	   B4	   0	Stores the break testing value, triggers on a 9 or 0 depending on count direction
+		   B5	   0	
+		   B6	   0	
+		   B7	   0	
+		   B8	   0	
+		   B9	   0	
+		   BA	   0	
+		   BB	   0	
+		   BC	   0	
+		   BD	   0	
+		   BE	   0	
+		   BF	   0	
+		   C0	   0	
+		   C1	   0	
+		   C2	   0	
+		   C3	   0	
+		   C4	   0	
+		   C5	   0	
+		   C6	   0	
+		   C7	   0	
+		   C8	   0	
+		   C9	   0	
+		   CA	   0	
+		   CB	   0	
+		   CC	   0	
+		   CD	   0	
+		   CE	   0	
+		   CF	   0	
+		   D0	   0	
+		   D1	   0	
+		   D2	   0	
+		   D3	   0	
+		   D4	   0	
+		   D5	   0	
+		   D6	   0	
+		   D7	   0	
+		   D8	   0	
+		   D9	   0	
+		   DA	   0	
+		   DB	   0	
+		   DC	   0	
+		   DD	   0	
+		   DE	   0	
+		   DF	   0	
+		   E0	   0	
+		   E1	   0	
+		   E2	   0	
+		   E3	   0	
+		   E4	   0	
+		   E5	   0	
+		   E6	   0	
+		   E7	   0	
+		   E8	   0	
+		   E9	   0	
+		   EA	   0	
+		   EB	   0	
+		   EC	   0	
+		   ED	   0	
+		   EE	   0	
+		   EF	   0	
+		   F0	   0	
+		   F1	   0	
+		   F2	   0	
+		   F3	   0	
+		   F4	   0	
+		   F5	   0	
+		   F6	   0	
+		   F7	   0	
+		   F8	   0	
+		   F9	   0	
+		   FA	   0	
+		   FB	   0	
+		   FC	   0	
+		   FD	   0	
+		   FE	   0	
+		   FF	   0	
