@@ -187,9 +187,10 @@ begin
 	--inputs are wired to the switch array, "input 0" on switches indexed 3 to 0 and 
 	--"input 1" on swithces indexed 7 to 4. The remaining inputs are hardwritten to zeros.
 	--The three outpus are wired to their respective seven-segment displays on the FPGA.
+	
 	computer: PRISM PORT MAP(
-		 Clock => Clockbus_Sig(21), 
-		 Reset_L =>  btn(3), 
+		 Clock => Clockbus_Sig(14), --Recomended 21 for original code --Recomend 16 for Counter--Recomend 14 for Adder
+		 Reset_L => not btn(3), 
 		 Control_Bus => contrl,
 		 Input_0 => switch(3 downto 0),
 		 Input_1 => switch(7 downto 4),
@@ -201,7 +202,9 @@ begin
 		 Output_3 => nibble3
 		 );	 
 	
-	LED(3 downto 0) <= contrl(17 downto 14); --Writes the instruction register to the LED's, for debugging
-	LED(7 downto 4) <= "0000";
+	--LED(3 downto 0) <= contrl(17 downto 14); --Writes the instruction register to the LED's, for debugging
+	--LED(7 downto 0) <= "00000000"; --Turns Off LEDs
+	LED(7 downto 4) <= switch(7 downto 4);
+	LED(3 downto 0) <= switch(3 downto 0);
 end Behavioral;
 
