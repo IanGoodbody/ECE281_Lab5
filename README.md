@@ -14,7 +14,7 @@ The first step was implemented fairly smoothly with no major debugging steps whi
 
 (Add entire screenshot of the waveform)
 
-Specifically analysis for each instruction is provided below. Note that the different periods for each instruction is a result of the multiple decode steps required by different instructions.
+Specific analysis for each instruction is provided below. Note that the different periods for each instruction is a result of the multiple decode steps required by different instructions.
 
 (Add lots of pretty pictures)
 
