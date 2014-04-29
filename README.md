@@ -66,6 +66,18 @@ After consulting Captain Trimble and Dr. Neebel for help with this error, simila
 
 The program was tested by observing the output cycle from 9 to f then remain in stasis at 0. Additionally the reset capability was checked to ensure that the program was restarted after the signal had been applied.
 
+### Questions
+
+1) All three control signals are inactive durring the FETCH phase.
+
+2) The next state asserted is the "Direct Execute" stage where the value is written to the Output port. The asserted control signals will be "r_w" => '0',  "addrsel", "enaccbuffer", and "iosel_l".
+
+3) The signals sent from the datapath to the controller are the Instruction Register, "alesszero", and "aeqzero".
+
+4) The "ACCLd" signal prompts the accumulator to store the ALU output. Because ADDI is an addition operation which adds the accumulator value to some value stored in ROM, the computer must both read from the accumulator then overwrite that value with the result of the ALU additon operation.
+
+5) Adding another instruction to the datapath would require drastic increses to the complexity of the design. As PRISM's current microarchitecture can only support 4 bits of data, and because the instruction list already has 16 instructions, another bit woudl have to be added tothe databus, the ALU expanded to occupy the new instruction, and a whole set of new controll signals set to the controller bus. Although the addition of a new instruction would have little inpacton the controller itself, the capacity of the datapath for data and instructions would double, increasing the complexity of the design for only a small increase in productivity springing from one instruction.
+
 ### Phase 2 Programming Assignment
 
 #### Counter
@@ -80,12 +92,4 @@ The output of the program was tested on the PRISM simulator and on the FPGA. In 
 
 Full functionality was achieved by creating a complete 4 bit unsigned adder using the PRISM language. The program was to read in two unsigned hexadecimal inputs and yield their unsigned hexadecimal sum. The main challenge of this program was to determine if a carry resulted from the PRISM add operation. This was determined by testing for generate and propagate conditions for each bit. Each bit was analyzed by rotating each bit into the MSB slot, the two MSBs were then ANDed together to determine if the bits generated a carry then, with the exception of the original LSB, ORed together to determine if the bit propagated. The result of each operation was stored into memory. 
 
-Jump Negative instructions were used to determine the generate/propagate conditions for each bit. If a generate or propagate flag was "true" then the MSB of the stored value would be a 1. Generate bits were tested first and the propagate bits in a cascading sequence. Depending on the sequence of propagates and generates the program would either jump to a "carry" or "noCarry" memory block what would write the carry bit to the 16^1 place output. The 16^0 place output was determined by the add operator.
-
-Like the Counter the second program was tested in the PRISM simulator then on the FPGA. Both tests demonstrated satisfactory results with only minor debugging.
-
-The only error in the program was an absence of necessary jump commands at the end of the program which caused the default output of the 16^1 place to be written at 1. 
-
-#### Documentation
-
-Dr. Neeble helped debug the ROM error that was preventing the FPGA implementation from successful operation 
+Jump Negative instructions were used to determine the generate/propagate conditions for each bit. If a generate or propagate flag was "true" then the MSB of the stored value would be a 1. Generate bits were tested first and the propagate bits in a cascading sequence. Depending on the sequence of propagates and generates the program would either jump to a "carry" or "noCarry" memory block 
